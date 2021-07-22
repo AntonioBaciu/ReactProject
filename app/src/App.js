@@ -13,6 +13,31 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true); // after data is fetched will be set to false
   const [query, setQuery] = useState("");
 
+  // Quotes
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
+
+  const quoteAPI = async () => {
+    let arrayOfQuotes = [];
+    try {
+      const data = await axios.get(
+        "https://breaking-bad-quotes.herokuapp.com/v1/quotes"
+      );
+      arrayOfQuotes = data.data;
+      // succesfully outputs the author|quote object
+      console.log(arrayOfQuotes[0]);
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      setQuote(arrayOfQuotes.content);
+      setAuthor(arrayOfQuotes.author);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // fething data from the API using axios
   // here I used the base URL from [source]: [https://breakingbadapi.com/documentation]
   useEffect(() => {
@@ -32,8 +57,15 @@ const App = () => {
     fetchItems();
   }, [query]);
 
+  useEffect(() => {
+    quoteAPI();
+  }, []);
+
   return (
     <div className="container">
+      {quote}
+      {author}
+      <button onClick={quoteAPI}>New Quote</button>
       <Header />
       <Search getQuery={(q) => setQuery(q)} />
       <CharacterGrid isLoading={isLoading} items={items} />

@@ -27,7 +27,7 @@ const App = () => {
       );
       arrayOfQuotes = data.data;
       // succesfully outputs the author|quote object
-      // console.log(arrayOfQuotes[0]);
+      console.log(arrayOfQuotes[0].quote.length);
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +35,14 @@ const App = () => {
     try {
       setQuote(arrayOfQuotes[0].quote);
       setAuthor(arrayOfQuotes[0].author);
+
+      // Sets the font size of the quote regarding its length
+      // Now the quote block will not look that akward anymore
+      if (arrayOfQuotes[0].quote.length > 80) {
+        document.getElementById("quote").style.fontSize = "40px";
+      } else {
+        document.getElementById("quote").style.fontSize = "70px";
+      }
     } catch (error) {
       console.log(error);
     }
@@ -65,18 +73,24 @@ const App = () => {
   }, [query]);
 
   return (
-    <div className="container">
+    <div id="container">
       <Header />
       <Search getQuery={(q) => setQuery(q)} />
-      <div className="quoteBox">
-        <div className="wrap">
-          <div className="quote">{quote}</div>
-          <div className="author">{author}</div>
-          <div className="quoteButton">
-            <button onClick={quoteAPI}>New Quote</button>
-          </div>
+
+      <div className="card-img overlay mt-3 mb-3 text-center p-3">
+        <div className="quote-wrap">
+          <p className="card-text quote" id="quote">
+            {quote}
+          </p>
+        </div>
+        <div className="author-wrap">
+          <p className="card-text author">{author}</p>
+          <button onClick={quoteAPI} type="button" className="btn btn-success ">
+            Generate Quote
+          </button>
         </div>
       </div>
+
       <CharacterGrid isLoading={isLoading} items={items} />
     </div>
   );

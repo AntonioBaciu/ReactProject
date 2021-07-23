@@ -3,6 +3,8 @@ import axios from "axios";
 import Header from "./components/ui/Header";
 import CharacterGrid from "./components/characters/CharacterGrid";
 import Search from "./components/ui/Search";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Quote.css";
 import "./App.css";
 
 const App = () => {
@@ -13,7 +15,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true); // after data is fetched will be set to false
   const [query, setQuery] = useState("");
 
-  // Quotes
+  // Quotes ////////////////////////////
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
 
@@ -25,18 +27,23 @@ const App = () => {
       );
       arrayOfQuotes = data.data;
       // succesfully outputs the author|quote object
-      console.log(arrayOfQuotes[0]);
+      // console.log(arrayOfQuotes[0]);
     } catch (error) {
       console.log(error);
     }
 
     try {
-      setQuote(arrayOfQuotes.content);
-      setAuthor(arrayOfQuotes.author);
+      setQuote(arrayOfQuotes[0].quote);
+      setAuthor(arrayOfQuotes[0].author);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    quoteAPI();
+  }, []);
+  // Quotes ////////////////////////////
 
   // fething data from the API using axios
   // here I used the base URL from [source]: [https://breakingbadapi.com/documentation]
@@ -57,17 +64,19 @@ const App = () => {
     fetchItems();
   }, [query]);
 
-  useEffect(() => {
-    quoteAPI();
-  }, []);
-
   return (
     <div className="container">
-      {quote}
-      {author}
-      <button onClick={quoteAPI}>New Quote</button>
       <Header />
       <Search getQuery={(q) => setQuery(q)} />
+      <div className="quoteBox">
+        <div className="wrap">
+          <div className="quote">{quote}</div>
+          <div className="author">{author}</div>
+          <div className="quoteButton">
+            <button onClick={quoteAPI}>New Quote</button>
+          </div>
+        </div>
+      </div>
       <CharacterGrid isLoading={isLoading} items={items} />
     </div>
   );

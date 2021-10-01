@@ -2,7 +2,7 @@
 
 ![](app/src/img/website-preview.png)
 
-## Desctiption:
+## Description:
 
 This project was made using React, Axios and Bootstrap.
 
@@ -10,7 +10,7 @@ Using **Axios**  I managed to fetch the characters from the famous series "**The
 
 from an **API** that you can find in the **resources** section.
 
-The **searchbar** functionality and the **quote generator** are created using **React**.
+The **search bar** functionality and the **quote generator** are created using **React**.
 
 I fetched a new free **API** containing popular quotes from the series(check **resources** section),
 
@@ -18,12 +18,12 @@ and created a functional **quote generator.**
 
 By working on this project I refreshed my memory on **Axios,** I practiced working with **React hooks**,
 
-I discovered interesting **APIs** and with the help of **Basile**, the most patient coach on Earth, I managed to identify why an missplaced **div** can lead to frustration and depression.
+I discovered interesting **APIs** and with the help of **Basile**, the most patient coach on Earth, I managed to identify why an misplaced **div** can lead to frustration and depression.
 
 ## Features:
 
 - [x]  Receive and display data from both APIs
-- [x]  Searchbar filter
+- [x]  Search bar filter
 - [x]  Quote generator
 - [x]  Loading animation
 

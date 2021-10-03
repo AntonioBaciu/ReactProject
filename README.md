@@ -1,6 +1,6 @@
 # Breaking Bad Cast
 
-![](app/src/img/website-preview.png)
+![](src/img/website-preview.png)
 
 ## Description:
 
